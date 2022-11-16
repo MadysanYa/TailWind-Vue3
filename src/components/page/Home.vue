@@ -6,29 +6,16 @@
         <div v-else>
             <!-- Carousel Section -->
             <div class="grid grid-cols-4 gap-4 pt-5">
-                <div id="carouselExampleCrossfade" class="carousel slide carousel-fade relative col-span-3"
-                    data-bs-ride="carousel">
-                    <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
-                        <button type="button" data-bs-target="#carouselExampleCrossfade" v-for="ads, index in advertise"
-                            :key="ads.id" v-bind:data-bs-slide-to="index" :class="[
-                                index == 0 ? 'active' : ''
-                            ]"></button>
-                    </div>
-                    <div class="carousel-inner relative w-full overflow-hidden rounded-lg">
-                        <div class="carousel-item float-left w-full h-max" v-for="ads, index in advertise" :key="ads.id"
-                            :class="[
-                                index == 0 ? 'active' : ''
-                            ]">
-                            <img v-bind:src="ads.image.large" class="block w-full" alt="Wild Landscape" />
-                        </div>
-                    </div>
-                </div>
+                <CarouselSection
+                    :data="advertise"
+                    :fromDetail="false"
+                    :colSpan="true"
+                />
 
-                <div class="w-full max-w-md p-5 bg-white border rounded-l">
+                <div class="w-full max-w-md p-5 bg-white border rounded-lg">
                     <div class="flex items-center justify-between mb-4">
                         <h5 class="font-bold leading-none">Latest News</h5>
                         <router-link :to="{ name: 'News' }" class=" text-sky-400 hover:underline">View all</router-link>
-                        <a href="#" class=" text-sky-400 hover:underline"></a>
                     </div>
                     <div class="flow-root overflow-auto">
                         <ul role="list" class="divide-y divide-gray-200">
@@ -38,9 +25,11 @@
                                         <img class="w-8 h-8" :src="data.featured_image.small" alt="">
                                     </div>
                                      <div class="flex-1 min-w-0">
-                                        <p class="text-sm text-gray-400 line-clamp-2">
-                                            {{ data.title }}
-                                        </p>
+                                        <router-link to="">
+                                            <p class="text-sm text-gray-400 line-clamp-2">
+                                                {{ data.title }}
+                                            </p>
+                                        </router-link>
                                     </div>
                                 </div>
                             </li>
@@ -61,7 +50,8 @@
                     :proType="recommended.property_type" :proImage="recommended.image.medium"
                     :proAddress="recommended.short_address" :landArea="recommended.land_area"
                     :perMeter="numberFormat(recommended.sale_list_price_per_square)"
-                    :createdDate="recommended.created_at" :view="recommended.view_count" routeName="BuySaleShow"
+                    :createdDate="recommended.created_at" 
+                    :view="recommended.view_count" routeName="BuySaleShow"
                     :paramId="recommended.id" />
             </div>
 
@@ -101,6 +91,7 @@
 <script>
 import TitleSection from '../TitleSection.vue'
 import CardSection from '../Card.vue'
+import CarouselSection from '../Carousel.vue'
 import SkeletonCard from '../loading/SkeletonCard.vue'
 import axios from 'axios'
 
@@ -109,7 +100,8 @@ export default {
     components: {
         TitleSection,
         CardSection,
-        SkeletonCard
+        SkeletonCard,
+        CarouselSection
     },
     data() {
         return {

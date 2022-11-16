@@ -29,6 +29,8 @@
                     :perMeter="numberFormat(recommended.sale_list_price_per_square)"
                     :createdDate="recommended.created_at"
                     :view="recommended.view_count"
+                    routeName="BuySaleShow"
+                    :paramId="recommended.id"
                 />
             </div>
         </div>

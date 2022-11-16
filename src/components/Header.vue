@@ -26,12 +26,12 @@
                         </div>
                     </div>
                     <div class="hidden sm:ml-6 sm:block">
-                    <div class="flex space-x-4">
-                        <router-link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</router-link>
-                        <router-link to="/buy-sell" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Buy/Sell</router-link>
-                        <router-link to="/indication-plus" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Indication Plus</router-link>
-                        <router-link to="/news" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">News</router-link>
-                    </div>
+                        <div class="flex space-x-4">
+                            <router-link :to="{name: 'Home'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</router-link>
+                            <router-link :to="{name: 'BuySale'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" :class="[$route.name == 'BuySaleShow' ? 'bg-gray-900' : '']">Buy/Sell</router-link>
+                            <router-link :to="{name: 'IndicationPlus'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Indication Plus</router-link>
+                            <router-link :to="{name: 'News'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">News</router-link>
+                        </div>
                     </div>
                 </div>
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
