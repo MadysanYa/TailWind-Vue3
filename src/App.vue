@@ -7,6 +7,8 @@
 
 <script>
 import Header from './components/Header.vue'
+import 'tw-elements'
+
 
 export default {
   name: 'App',

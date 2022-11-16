@@ -12,12 +12,12 @@ const routes = [
     component: Home
   },
   {
-    path: '/buy-sale',
+    path: '/buy-sell',
     name: 'BuySale',
     component: BuySale
   },
   {
-    path: '/buy-sale/:id/show',
+    path: '/buy-sell/:id/show',
     name: 'BuySaleShow',
     component: DetailPage
   },

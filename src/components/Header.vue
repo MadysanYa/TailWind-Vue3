@@ -1,6 +1,6 @@
 <template>
     <nav class="bg-gray-800 sticky top-0">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="mx-auto px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
                     <!-- Mobile menu button-->
@@ -28,7 +28,7 @@
                     <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         <router-link to="/" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</router-link>
-                        <router-link to="/buy-sale" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Buy/Sale</router-link>
+                        <router-link to="/buy-sell" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Buy/Sell</router-link>
                         <router-link to="/indication-plus" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Indication Plus</router-link>
                         <router-link to="/news" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">News</router-link>
                     </div>
