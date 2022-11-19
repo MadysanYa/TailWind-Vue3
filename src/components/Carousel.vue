@@ -41,7 +41,9 @@ export default {
         'colSpan',
     ],
     data() {
-
+        return {
+            
+        }
     }
 }
 </script>

@@ -32,6 +32,8 @@
                     routeName="BuySaleShow"
                     :paramId="recommended.id"
                 />
+
+                <InfiniteLoading @infinite="loadData" v-if="recommendeds.length"/>
             </div>
         </div>
     </div>
@@ -42,18 +44,22 @@ import TitleSection from '../TitleSection.vue'
 import CardSection from '../Card.vue'
 import SkeletonCard from '../loading/SkeletonCard.vue'
 import axios from 'axios'
+import InfiniteLoading from "v3-infinite-loading"
 
 export default {
     name: 'Buy-Sale-Page',
     components: {
         TitleSection,
         CardSection,
-        SkeletonCard
+        SkeletonCard,
+        InfiniteLoading
     },
     data() {
         return {
             loading: true,
             errored: false,
+            page: 1,
+            last_page: 1,
             recommendeds: [],
             skeletons: [
                 {id:1},
@@ -65,7 +71,7 @@ export default {
         }
     },
     methods: {
-        async getAllRecommended() {
+        async getAllProperties() {
             await axios
             .get(`${this.baseUrl}/api/v2/listings`, {
                 params: {
@@ -73,10 +79,12 @@ export default {
                     is_sale: 1,
                     is_rent: 0,
                     address: '12',
+                    page: this.page
                 }
             })
             .then((response) => {
-                return this.recommendeds = response.data.data;
+                this.recommendeds.push(...response.data.data)
+                this.last_page = response.data.data.last_page
             })
             .catch((error) => {
                 console.log(error);
@@ -86,13 +94,20 @@ export default {
         },
         numberFormat(val) {
             return val.toFixed(2)
+        },
+        loadData(isVisibility) { 
+            if (!isVisibility) { return }
+            if (this.page >= this.last_page) { return }
+
+            this.page++
+            this.getAllProperties()
         }
     },
     computed: {
         
     },
     mounted() {
-        this.getAllRecommended()
+        this.getAllProperties()
     },
 }
 </script>
