@@ -28,8 +28,8 @@
                     <div class="hidden sm:ml-6 sm:block">
                         <div class="flex space-x-4">
                             <router-link :to="{name: 'Home'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Home</router-link>
-                            <router-link :to="{name: 'BuySale'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" :class="[$route.name == 'BuySaleShow' ? 'bg-gray-900' : '']">Buy/Sell</router-link>
-                            <router-link :to="{name: 'IndicationPlus'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Indication Plus</router-link>
+                            <router-link :to="{name: 'BuySale'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" :class="[$route.name == 'BuySaleShow' || $route.name == 'BuySaleType' ? 'bg-gray-900' : '']">Buy/Sell</router-link>
+                            <!-- <router-link :to="{name: 'IndicationPlus'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Indication Plus</router-link> -->
                             <router-link :to="{name: 'News'}" class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">News</router-link>
                         </div>
                     </div>

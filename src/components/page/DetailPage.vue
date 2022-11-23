@@ -1,6 +1,6 @@
 <template>
     <div>
-        <TitleSection title="Preview Detail" />
+        <TitleSection title="Preview Detail" listingType="preview-detail"/>
         <!-- Carousel Section -->
         <CarouselSection
             :data="listingDetail.gallery"
@@ -38,8 +38,11 @@
                     <p class="mb-2 font-normal text-gray-400">Shape</p>
                 </div>
             </div>
-            <div class="grid grid-cols-1">
-                <p class="mb-2 font-normal text-gray-700">{{ listingDetail.address }}</p>
+            <div class="flex grid-flow-row items-center">
+                <img class="mb-2 mr-3" src="@/assets/icon/location.svg" alt="">
+                <p class="mb-2 font-normal text-gray-700">
+                    {{ listingDetail.address }}
+                </p>
             </div>
             <div class="flex flex-row">
                 <p class="font-normal text-gray-700">Listed on <span class="font-semibold">Z1 4 months</span></p>

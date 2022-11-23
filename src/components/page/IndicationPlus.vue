@@ -2,6 +2,7 @@
     <div>
         <TitleSection
             title="All Indication Plus"
+            listingType="indication-plus"
         />
         <div class="grid grid-cols-4 gap-4">
 

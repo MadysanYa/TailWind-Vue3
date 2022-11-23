@@ -1,18 +1,18 @@
 <template>
     <div id="carouselExampleCrossfade" class="carousel slide carousel-fade relative" data-bs-ride="carousel" :class="[colSpan ? 'col-span-3' : '']">
-        <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
+        <div class="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4" >
             <button type="button" data-bs-target="#carouselExampleCrossfade" v-for="val, index in data" :key="val.id"
                 v-bind:data-bs-slide-to="index" :class="[
                     index == 0 ? 'active' : ''
                 ]"></button>
         </div>
-        <div class="carousel-inner relative w-full overflow-hidden rounded-lg">
-            <div class="carousel-item float-left w-full" v-for="val, index in data" :key="val.id" :class="[
+        <div class="carousel-inner relative overflow-hidden rounded-lg bg-gray-400" style="height: 539px;">
+            <div class="carousel-item h-full w-full" v-for="val, index in data" :key="val.id" :class="[
                 index == 0 ? 'active' : '',
-                fromDetail ? 'max-h-96' : 'h-max'
+                fromDetail ? '' : ''
             ]">
-                <img v-if="fromDetail" :src="val.large" class="block w-full" alt=""/>
-                <img v-else :src="val.image.large" class="block w-full" alt=""/>
+                <img v-if="fromDetail" :src="val.large" class="block h-full mx-auto" alt=""/>
+                <img v-else :src="val.image.large" class="block h-full mx-auto" alt=""/>
 
             </div>
         </div>

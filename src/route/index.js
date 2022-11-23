@@ -22,6 +22,11 @@ const routes = [
     component: DetailPage
   },
   {
+    path: '/buy-sell/:filterType',
+    name: 'BuySaleType',
+    component: BuySale
+  },
+  {
     path: '/indication-plus',
     name: 'IndicationPlus',
     component: IndicationPlus

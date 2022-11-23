@@ -17,29 +17,32 @@
                         <h5 class="font-bold leading-none">Latest News</h5>
                         <router-link :to="{ name: 'News' }" class=" text-sky-400 hover:underline">View all</router-link>
                     </div>
-                    <div class="flow-root overflow-auto">
-                        <ul role="list" class="divide-y divide-gray-200">
-                            <li class="border" v-for="data in news" :key="data.id">
-                                <div class="flex items-center space-x-4 p-2">
-                                    <div class="flex-shrink-0">
-                                        <img class="w-8 h-8" :src="data.featured_image.small" alt="">
+                    <div class="flow-root">
+                        <div class="overflow-y-auto" style="height: 457px;">
+                            <ul role="list" class="divide-y divide-gray-200">
+                                <li class="border" v-for="data in news" :key="data.id">
+                                    <div class="flex items-center space-x-4 p-2">
+                                        <div class="flex-shrink-0">
+                                            <img class="h-10 w-14" :src="data.featured_image.small" alt="">
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <router-link to="">
+                                                <p class="text-sm text-gray-400 line-clamp-2">
+                                                    {{ data.title }}
+                                                </p>
+                                            </router-link>
+                                        </div>
                                     </div>
-                                     <div class="flex-1 min-w-0">
-                                        <router-link to="">
-                                            <p class="text-sm text-gray-400 line-clamp-2">
-                                                {{ data.title }}
-                                            </p>
-                                        </router-link>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                            <InfiniteLoading @infinite="loadData" v-if="news.length != total"/>
+                        </div>
                     </div>
                 </div>
 
             </div>
 
-            <TitleSection title="Recommended" :isSeeMore="true" />
+            <TitleSection title="Recommended" :isSeeMore="true" listingType="recommended"/>
             <div class="grid grid-cols-4 gap-4" v-if="loading">
                 <SkeletonCard v-for="skeleton in skeletons" :key="skeleton.id" />
             </div>
@@ -55,7 +58,7 @@
                     :paramId="recommended.id" />
             </div>
 
-            <TitleSection title="Most Viewed" :isSeeMore="true" />
+            <TitleSection title="Most Viewed" :isSeeMore="true" listingType="most-viewed"/>
             <div class="grid grid-cols-4 gap-4" v-if="loading">
                 <SkeletonCard v-for="skeleton in skeletons" :key="skeleton.id" />
             </div>
@@ -70,7 +73,7 @@
             </div>
 
 
-            <TitleSection title="Latest Properties" :isSeeMore="true" />
+            <TitleSection title="Latest Properties" :isSeeMore="true" listingType="latest-properties"/>
             <div class="grid grid-cols-4 gap-4" v-if="loading">
                 <SkeletonCard v-for="skeleton in skeletons" :key="skeleton.id" />
             </div>
@@ -93,6 +96,7 @@ import TitleSection from '../TitleSection.vue'
 import CardSection from '../Card.vue'
 import CarouselSection from '../Carousel.vue'
 import SkeletonCard from '../loading/SkeletonCard.vue'
+import InfiniteLoading from "v3-infinite-loading"
 import axios from 'axios'
 
 export default {
@@ -101,12 +105,16 @@ export default {
         TitleSection,
         CardSection,
         SkeletonCard,
-        CarouselSection
+        CarouselSection,
+        InfiniteLoading
     },
     data() {
         return {
             loading: true,
             errored: false,
+            total: 0,
+            page: 1,
+            per_page: 8,
             limit: 4,
             recommendeds: [],
             mostViews: [],
@@ -199,11 +207,14 @@ export default {
             await axios
                 .get(`${this.baseUrl}/api/v2/news_and_ads`, {
                     params: {
-                        format: 'News'
+                        format: 'News',
+                        page: this.page,
+                        per_page: this.per_page
                     }
                 })
                 .then((response) => {
-                    return this.news = response.data.data.slice(0, 6);
+                    this.news.push(...response.data.data)
+                    this.total = response.data.meta.total
                 })
                 .catch((error) => {
                     console.log(error);
@@ -213,6 +224,11 @@ export default {
         },
         numberFormat(val) {
             return val.toFixed(2)
+        },
+        loadData() {
+            console.log('Hello Vue');
+            this.page++
+            this.getAllNews()
         }
     },
     computed: {
